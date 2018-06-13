@@ -125,7 +125,6 @@ class TestUserService(BaseTestCase):
             self.assertIn('User does not exist', data['message'])
             self.assertIn('fail', data['status'])
 
-
     def test_all_users(self):
         """Ensure get all users behaves correctly."""
         add_user('michael', 'michael@mherman.org')
