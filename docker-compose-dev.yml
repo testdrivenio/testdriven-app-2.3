@@ -15,6 +15,7 @@ services:
       - APP_SETTINGS=project.config.DevelopmentConfig
       - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
+      - SECRET_KEY=my_precious  # new
     depends_on:
       - users-db
 
@@ -52,4 +53,4 @@ services:
       - 80:80
     depends_on:
       - users
-      - client  # new
+      - client
