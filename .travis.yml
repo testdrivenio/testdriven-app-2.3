@@ -14,10 +14,7 @@ before_install:
 
 before_script:
   - export REACT_APP_USERS_SERVICE_URL=http://127.0.0.1
-  - docker-compose -f docker-compose-prod.yml up --build -d  # new
+  - npm install
 
 script:
-  - bash test.sh stage  # new
-
-after_script:
-  - docker-compose -f docker-compose-prod.yml down  # new
+  - bash test.sh stage

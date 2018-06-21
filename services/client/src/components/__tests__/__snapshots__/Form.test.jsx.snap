@@ -22,7 +22,7 @@ exports[`When not authenticated Login Form renders a snapshot properly 1`] = `
         placeholder="Enter an email address"
         required={true}
         type="email"
-        value=""
+        value={undefined}
       />
     </div>
     <div
@@ -35,7 +35,7 @@ exports[`When not authenticated Login Form renders a snapshot properly 1`] = `
         placeholder="Enter a password"
         required={true}
         type="password"
-        value=""
+        value={undefined}
       />
     </div>
     <input
@@ -69,7 +69,7 @@ exports[`When not authenticated Register Form renders a snapshot properly 1`] = 
         placeholder="Enter a username"
         required={true}
         type="text"
-        value=""
+        value={undefined}
       />
     </div>
     <div
@@ -82,7 +82,7 @@ exports[`When not authenticated Register Form renders a snapshot properly 1`] = 
         placeholder="Enter an email address"
         required={true}
         type="email"
-        value=""
+        value={undefined}
       />
     </div>
     <div
@@ -95,7 +95,7 @@ exports[`When not authenticated Register Form renders a snapshot properly 1`] = 
         placeholder="Enter a password"
         required={true}
         type="password"
-        value=""
+        value={undefined}
       />
     </div>
     <input

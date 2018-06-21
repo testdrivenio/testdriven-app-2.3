@@ -4,32 +4,28 @@ env=$1
 file=""
 fails=""
 
-# set appropriate environment
-if [[ "${env}" == "dev" ]]; then
-  file="docker-compose-dev.yml"
-elif [[ "${env}" == "stage" ]]; then
-  file="docker-compose-prod.yml"
-elif [[ "${env}" == "prod" ]]; then
-  file="docker-compose-prod.yml"
-else
-  echo "USAGE: sh test.sh environment_name"
-  echo "* environment_name: must either be 'dev', 'stage', or 'prod'"
-  exit 1
-fi
-
 inspect() {
   if [ $1 -ne 0 ]; then
     fails="${fails} $2"
   fi
 }
 
-# test
-docker-compose -f $file run users python manage.py test
+# run unit and integration tests
+docker-compose -f docker-compose-dev.yml up -d --build
+docker-compose -f docker-compose-dev.yml run users python manage.py test
 inspect $? users
-docker-compose -f $file run users flake8 project
+docker-compose -f docker-compose-dev.yml run users flake8 project
 inspect $? users-lint
-docker-compose -f $file run client npm test -- --coverage
+docker-compose -f docker-compose-dev.yml run client npm test -- --coverage
 inspect $? client
+docker-compose -f docker-compose-dev.yml down
+
+# run e2e tests
+docker-compose -f docker-compose-prod.yml up -d --build
+docker-compose -f docker-compose-prod.yml run users python manage.py recreate_db
+./node_modules/.bin/cypress run --config baseUrl=http://localhost
+inspect $? e2e
+docker-compose -f docker-compose-prod.yml down
 
 # return proper code
 if [ -n "${fails}" ]; then

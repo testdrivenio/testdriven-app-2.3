@@ -1,0 +1,7 @@
+{
+  "name": "test-driven-io",
+  "devDependencies": {
+    "cypress": "^3.0.1",
+    "randomstring": "^1.1.5"
+  }
+}
