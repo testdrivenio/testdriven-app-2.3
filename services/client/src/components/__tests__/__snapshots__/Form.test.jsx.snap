@@ -9,6 +9,23 @@ exports[`When not authenticated Login Form renders a snapshot properly 1`] = `
   </h1>
   <hr />
   <br />
+  <div>
+    <ul
+      className="validation-list"
+    >
+      <li
+        className="error"
+      >
+        Email is required.
+      </li>
+      <li
+        className="error"
+      >
+        Password is required.
+      </li>
+    </ul>
+    <br />
+  </div>
   <form
     onSubmit={[Function]}
   >
@@ -22,7 +39,7 @@ exports[`When not authenticated Login Form renders a snapshot properly 1`] = `
         placeholder="Enter an email address"
         required={true}
         type="email"
-        value={undefined}
+        value=""
       />
     </div>
     <div
@@ -35,11 +52,12 @@ exports[`When not authenticated Login Form renders a snapshot properly 1`] = `
         placeholder="Enter a password"
         required={true}
         type="password"
-        value={undefined}
+        value=""
       />
     </div>
     <input
       className="button is-primary is-medium is-fullwidth"
+      disabled={true}
       type="submit"
       value="Submit"
     />
@@ -56,6 +74,33 @@ exports[`When not authenticated Register Form renders a snapshot properly 1`] = 
   </h1>
   <hr />
   <br />
+  <div>
+    <ul
+      className="validation-list"
+    >
+      <li
+        className="error"
+      >
+        Username must be greater than 5 characters.
+      </li>
+      <li
+        className="error"
+      >
+        Email must be greater than 5 characters.
+      </li>
+      <li
+        className="error"
+      >
+        Email must be a valid email address.
+      </li>
+      <li
+        className="error"
+      >
+        Password must be greater than 10 characters.
+      </li>
+    </ul>
+    <br />
+  </div>
   <form
     onSubmit={[Function]}
   >
@@ -69,7 +114,7 @@ exports[`When not authenticated Register Form renders a snapshot properly 1`] = 
         placeholder="Enter a username"
         required={true}
         type="text"
-        value={undefined}
+        value=""
       />
     </div>
     <div
@@ -82,7 +127,7 @@ exports[`When not authenticated Register Form renders a snapshot properly 1`] = 
         placeholder="Enter an email address"
         required={true}
         type="email"
-        value={undefined}
+        value=""
       />
     </div>
     <div
@@ -95,11 +140,12 @@ exports[`When not authenticated Register Form renders a snapshot properly 1`] = 
         placeholder="Enter a password"
         required={true}
         type="password"
-        value={undefined}
+        value=""
       />
     </div>
     <input
       className="button is-primary is-medium is-fullwidth"
+      disabled={true}
       type="submit"
       value="Submit"
     />

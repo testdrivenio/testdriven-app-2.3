@@ -15,7 +15,7 @@ services:
       - APP_SETTINGS=project.config.DevelopmentConfig
       - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
-      - SECRET_KEY=my_precious  # new
+      - SECRET_KEY=my_precious
     depends_on:
       - users-db
 
@@ -41,6 +41,20 @@ services:
     environment:
       - NODE_ENV=development
       - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+    depends_on:
+      - users
+
+  swagger:
+    build:
+      context: ./services/swagger
+      dockerfile: Dockerfile-dev
+    # new
+    volumes:
+        - './services/swagger/swagger.json:/usr/share/nginx/html/swagger.json'
+    ports:
+      - 3008:8080
+    environment:
+      - URL=swagger.json
     depends_on:
       - users
 
