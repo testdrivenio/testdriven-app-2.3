@@ -28,8 +28,8 @@ before_script:
   - npm install
 
 script:
-  - bash test-ci.sh $TRAVIS_BRANCH  # new
+  - bash test-ci.sh $TRAVIS_BRANCH
 
-# new
 after_success:
   - bash ./docker-push.sh
+  - bash ./docker-deploy-stage.sh  # new
