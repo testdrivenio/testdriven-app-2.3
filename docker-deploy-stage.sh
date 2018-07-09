@@ -34,40 +34,33 @@ then
 
     deploy_cluster() {
 
-      # new
       cluster="test-driven-staging-cluster"
 
       # users
-      # new
       service="testdriven-users-stage-service"
       template="ecs_users_stage_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
-      # new
       update_service
 
       # client
-      # new
       service="testdriven-client-stage-service"
       template="ecs_client_stage_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
-      # new
       update_service
 
       # swagger
-      # new
       service="testdriven-swagger-stage-service"
       template="ecs_swagger_stage_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
-      # new
       update_service
 
     }
