@@ -24,7 +24,6 @@ then
       fi
     }
 
-    # new
     update_service() {
       if [[ $(aws ecs update-service --cluster $cluster --service $service --task-definition $revision | $JQ '.service.taskDefinition') != $revision ]]; then
         echo "Error updating service."
@@ -62,6 +61,15 @@ then
       echo "$task_def"
       register_definition
       update_service
+
+      # exercises
+      service="testdriven-exercises-stage-service"
+      template="ecs_exercises_stage_taskdefinition.json"
+      task_template=$(cat "ecs/$template")
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
+      echo "$task_def"
+      register_definition
+      update_service  # new
 
     }
 
