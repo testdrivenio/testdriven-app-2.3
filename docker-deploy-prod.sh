@@ -24,7 +24,6 @@ then
       fi
     }
 
-    # new
     update_service() {
       if [[ $(aws ecs update-service --cluster $cluster --service $service --task-definition $revision | $JQ '.service.taskDefinition') != $revision ]]; then
         echo "Error updating service."
@@ -37,31 +36,39 @@ then
       cluster="test-driven-production-cluster" # new
 
       # users
-      service="testdriven-users-prod-service"  # new
+      service="testdriven-users-prod-service"
       template="ecs_users_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_RDS_URI $PRODUCTION_SECRET_KEY)
       echo "$task_def"
       register_definition
-      update_service  # new
+      update_service
 
       # client
-      service="testdriven-client-prod-service"  # new
+      service="testdriven-client-prod-service"
       template="ecs_client_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
-      update_service  # new
+      update_service
 
       # swagger
-      service="testdriven-swagger-prod-service"  # new
+      service="testdriven-swagger-prod-service"
       template="ecs_swagger_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
-      update_service  # new
+      update_service
+
+      # exercises
+      service="testdriven-exercises-prod-service"
+      template="ecs_exercises_prod_taskdefinition.json"
+      task_template=$(cat "ecs/$template")
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID "tbd")
+      echo "$task_def"
+      register_definition
 
     }
 
