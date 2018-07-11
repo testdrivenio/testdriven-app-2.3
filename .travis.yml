@@ -15,10 +15,10 @@ env:
   CLIENT_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/client
   SWAGGER: test-driven-swagger
   SWAGGER_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/swagger
-  EXERCISES: test-driven-exercises  # new
-  EXERCISES_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/exercises  # new
-  EXERCISES_DB: test-driven-exercises_db  # new
-  EXERCISES_DB_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/exercises/project/db  # new
+  EXERCISES: test-driven-exercises
+  EXERCISES_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/exercises
+  EXERCISES_DB: test-driven-exercises_db
+  EXERCISES_DB_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/exercises/project/db
   SECRET_KEY: my_precious
 
 before_install:
@@ -29,8 +29,11 @@ before_install:
 
 before_script:
   - export REACT_APP_USERS_SERVICE_URL=http://127.0.0.1
-  - export REACT_APP_EXERCISES_SERVICE_URL=http://127.0.0.1  # new
-  - export REACT_APP_API_GATEWAY_URL=https://API_GATEWAY_URL  # new
+  - export REACT_APP_EXERCISES_SERVICE_URL=http://127.0.0.1
+  - export REACT_APP_API_GATEWAY_URL=https://vhqtjvyxek.execute-api.us-east-1.amazonaws.com/v1/execute
+  - if [[ "$TRAVIS_BRANCH" == "staging" ]]; then export LOAD_BALANCER_DNS_NAME=http://testdriven-staging-alb-2120066943.us-east-1.elb.amazonaws.com; fi
+  - if [[ "$TRAVIS_BRANCH" == "production" ]]; then export LOAD_BALANCER_DNS_NAME=http://testdriven-production-alb-1112328201.us-east-1.elb.amazonaws.com; fi
+  - echo $LOAD_BALANCER_DNS_NAME
   - npm install
 
 script:
