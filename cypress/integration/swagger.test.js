@@ -9,7 +9,7 @@ describe('Swagger', () => {
 
       cy.get('select > option').then((el) => {
         cy.location().then((loc) => {
-          expect((el).text()).to.contain(Cypress.env('LOAD_BALANCER_STAGE_DNS_NAME'));
+          expect((el).text()).to.contain(Cypress.env('LOAD_BALANCER_DNS_NAME'));
         });
       });
 
