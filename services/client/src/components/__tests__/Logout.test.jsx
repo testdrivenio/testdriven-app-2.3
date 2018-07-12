@@ -7,11 +7,9 @@ import Logout from '../Logout';
 
 const logoutUser = jest.fn();
 
-test('Logout renders a snapshot properly', () => {
-  const tree = renderer.create(
-    <Router><Logout logoutUser={logoutUser}/></Router>
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
+beforeEach(() => {
+  console.error = jest.fn();
+  console.error.mockClear();
 });
 
 test('Logout renders properly', () => {
@@ -19,4 +17,19 @@ test('Logout renders properly', () => {
   const element = wrapper.find('p');
   expect(element.length).toBe(1);
   expect(element.get(0).props.children[0]).toContain('You are now logged out.');
+  expect(console.error).toHaveBeenCalledTimes(0);
+});
+
+test('Logout does not render properly when not all props are defined', () => {
+  const onDidMount = jest.fn();
+  Logout.prototype.componentDidMount = onDidMount;
+  const wrapper = shallow(<Logout/>);
+  expect(console.error).toHaveBeenCalledTimes(1);
+});
+
+test('Logout renders a snapshot properly', () => {
+  const tree = renderer.create(
+    <Router><Logout logoutUser={logoutUser}/></Router>
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
 });

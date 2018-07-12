@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
@@ -61,11 +62,9 @@ class Form extends Component {
       this.props.loginUser(res.data.auth_token);
     })
     .catch((err) => {
-      // new
       if (formType === 'Login') {
         this.props.createMessage('User does not exist.', 'danger');
       };
-      // new
       if (formType === 'Register') {
         this.props.createMessage('That user already exists.', 'danger');
       };
@@ -129,8 +128,7 @@ class Form extends Component {
     if (this.props.isAuthenticated) {
       return <Redirect to='/' />;
     };
-    let formRules = this.state.loginFormRules;  // new
-    // new
+    let formRules = this.state.loginFormRules;
     if (this.props.formType === 'Register') {
       formRules = this.state.registerFormRules;
     }
@@ -138,7 +136,6 @@ class Form extends Component {
       <div>
         <h1 className="title is-1">{this.props.formType}</h1>
         <hr/><br/>
-        {/* new */}
         <FormErrors
           formType={this.props.formType}
           formRules={formRules}
@@ -189,6 +186,13 @@ class Form extends Component {
       </div>
     )
   };
+};
+
+Form.propTypes = {
+  formType: PropTypes.string.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  createMessage: PropTypes.func.isRequired,
 };
 
 export default Form;
