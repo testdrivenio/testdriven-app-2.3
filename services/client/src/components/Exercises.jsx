@@ -156,7 +156,7 @@ class Exercises extends Component {
             <span>Please log in to submit an exercise.</span>
           </div>
         }
-        {this.state.exercises.length &&
+        {this.state.exercises.length > 0 &&
           <Exercise
             exercise={this.state.exercises[this.state.currentExercise]}
             editor={this.state.editor}
