@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const NavBar = (props) => (
@@ -47,5 +48,10 @@ const NavBar = (props) => (
     </section>
   </nav>
 )
+
+NavBar.propTypes = {
+  title: PropTypes.string.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+};
 
 export default NavBar;
