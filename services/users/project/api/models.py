@@ -17,7 +17,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(128), unique=True, nullable=False)
     email = db.Column(db.String(128), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)  # new
+    password = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean(), default=True, nullable=False)
     created_date = db.Column(db.DateTime, default=func.now(), nullable=False)
     admin = db.Column(db.Boolean, default=False, nullable=False)
@@ -25,7 +25,6 @@ class User(db.Model):
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
-        # new
         self.password = bcrypt.generate_password_hash(
             password, current_app.config.get('BCRYPT_LOG_ROUNDS')
         ).decode()
@@ -36,13 +35,13 @@ class User(db.Model):
             'username': self.username,
             'email': self.email,
             'active': self.active,
-            'admin': self.admin  # new
+            'admin': self.admin
         }
 
     def encode_auth_token(self, user_id):
         """Generates the auth token"""
         try:
-            # new
+  
             payload = {
                 'exp': datetime.datetime.utcnow() + datetime.timedelta(
                     days=current_app.config.get('TOKEN_EXPIRATION_DAYS'),

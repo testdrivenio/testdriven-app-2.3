@@ -6,8 +6,8 @@ import coverage
 
 from flask.cli import FlaskGroup
 
-from project import create_app, db  # new
-from project.api.models import Exercise  # new
+from project import create_app, db
+from project.api.models import Exercise
 
 
 COV = coverage.coverage(

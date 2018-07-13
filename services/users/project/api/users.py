@@ -41,7 +41,6 @@ def add_user(resp):
         'status': 'fail',
         'message': 'Invalid payload.'
     }
-    # new
     if not is_admin(resp):
         response_object['message'] = 'You do not have permission to do that.'
         return jsonify(response_object), 401

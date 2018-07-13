@@ -28,11 +28,9 @@ const NavBar = (props) => (
           {props.isAuthenticated &&
             <Link to="/status" className="navbar-item">User Status</Link>
           }
-          {/* new */}
           <a href="/swagger" className="navbar-item">Swagger</a>
         </div>
         <div className="navbar-end">
-          {/* new */}
           {!props.isAuthenticated &&
             <div className="navbar-item">
               <Link to="/register" className="button is-primary">Register</Link>
